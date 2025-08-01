@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbesencia Chat Bot IA - Descubre tu Corte Perfecto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --primary-50: hsl(210, 40%, 98%);
+            --primary-100: hsl(210, 40%, 96%);
+            --primary-200: hsl(210, 40%, 94%);
+            --primary-300: hsl(210, 25%, 84%);
+            --primary-400: hsl(210, 15%, 65%);
+            --primary-500: hsl(210, 11%, 51%);
+            --primary-600: hsl(210, 12%, 35%);
+            --primary-700: hsl(210, 18%, 22%);
+            --primary-800: hsl(210, 18%, 13%);
+            --primary-900: hsl(210, 23%, 9%);
+            --accent-50: hsl(270, 100%, 98%);
+            --accent-100: hsl(269, 100%, 95%);
+            --accent-200: hsl(269, 100%, 92%);
+            --accent-300: hsl(268, 100%, 86%);
+            --accent-400: hsl(270, 95%, 75%);
+            --accent-500: hsl(270, 91%, 65%);
+            --accent-600: hsl(271, 81%, 56%);
+            --warm-50: hsl(33, 100%, 96%);
+            --warm-100: hsl(34, 100%, 92%);
+            --warm-200: hsl(32, 98%, 83%);
+            --warm-300: hsl(31, 97%, 72%);
+            --warm-400: hsl(27, 96%, 61%);
+            --warm-500: hsl(25, 95%, 53%);
+            --warm-600: hsl(21, 90%, 48%);
+        }
+        
+        .bg-primary-50 { background-color: var(--primary-50); }
+        .bg-primary-100 { background-color: var(--primary-100); }
+        .bg-primary-200 { background-color: var(--primary-200); }
+        .bg-primary-300 { background-color: var(--primary-300); }
+        .bg-primary-600 { background-color: var(--primary-600); }
+        .bg-primary-700 { background-color: var(--primary-700); }
+        .bg-primary-800 { background-color: var(--primary-800); }
+        
+        .text-primary-300 { color: var(--primary-300); }
+        .text-primary-400 { color: var(--primary-400); }
+        .text-primary-500 { color: var(--primary-500); }
+        .text-primary-600 { color: var(--primary-600); }
+        .text-primary-700 { color: var(--primary-700); }
+        .text-primary-800 { color: var(--primary-800); }
+        
+        .bg-accent-50 { background-color: var(--accent-50); }
+        .bg-accent-100 { background-color: var(--accent-100); }
+        .bg-accent-200 { background-color: var(--accent-200); }
+        .bg-accent-500 { background-color: var(--accent-500); }
+        .bg-accent-600 { background-color: var(--accent-600); }
+        .text-accent-500 { color: var(--accent-500); }
+        .text-accent-600 { color: var(--accent-600); }
+        
+        .bg-warm-50 { background-color: var(--warm-50); }
+        .bg-warm-100 { background-color: var(--warm-100); }
+        .bg-warm-500 { background-color: var(--warm-500); }
+        .text-warm-500 { color: var(--warm-500); }
+        
+        .border-primary-200 { border-color: var(--primary-200); }
+        .border-primary-300 { border-color: var(--primary-300); }
+        .border-primary-600 { border-color: var(--primary-600); }
+        .border-primary-700 { border-color: var(--primary-700); }
+        .border-accent-200 { border-color: var(--accent-200); }
+        .border-accent-300 { border-color: var(--accent-300); }
+        
+        .shadow-elegant { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
+        .shadow-card { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-500), var(--warm-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--accent-500), var(--warm-500));
+        }
+        
+        .selected-face-type {
+            background: linear-gradient(135deg, var(--accent-100), var(--accent-200));
+            border-color: var(--accent-400);
+        }
+        
+        .face-type-card {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .face-type-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-gradient-to-br from-primary-50 to-accent-50">
+    
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-primary-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                        <i data-lucide="scissors" class="text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-primary-800">Barbesencia Chat Bot IA</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <button onclick="scrollToSection('inicio')" class="text-primary-600 hover:text-accent-500 transition-colors">Inicio</button>
+                    <button onclick="scrollToSection('analisis')" class="text-primary-600 hover:text-accent-500 transition-colors">Análisis</button>
+                    <button onclick="scrollToSection('catalogo')" class="text-primary-600 hover:text-accent-500 transition-colors">Catálogo</button>
+                    <button onclick="scrollToSection('generador')" class="text-primary-600 hover:text-accent-500 transition-colors">Generador</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl sm:text-5xl font-bold text-primary-800 mb-6">
+                    Tu barbero virtual con
+                    <span class="gradient-text"> Chat Bot IA Barbesencia</span>
+                </h1>
+                <p class="text-xl text-primary-600 max-w-3xl mx-auto mb-8">
+                    Conversa con nuestro chatbot especializado en barbería. Recibe recomendaciones personalizadas, 
+                    genera imágenes realistas y descubre el estilo perfecto para tu rostro.
+                </p>
+                <button onclick="scrollToSection('analisis')" class="gradient-bg hover:opacity-90 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 transform hover:scale-105 shadow-elegant">
+                    <i data-lucide="sparkles" class="inline mr-2" size="20"></i>
+                    Comenzar Análisis
+                </button>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-primary-200 hover:shadow-elegant transition-all duration-200">
+                    <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="user-check" class="text-accent-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-800 mb-2">Análisis de Rostro</h3>
+                    <p class="text-primary-600">Identifica tu tipo de rostro y recibe recomendaciones personalizadas.</p>
+                </div>
+                <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-primary-200 hover:shadow-elegant transition-all duration-200">
+                    <div class="w-12 h-12 bg-warm-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="brain" class="text-warm-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-800 mb-2">Chat Bot Inteligente</h3>
+                    <p class="text-primary-600">Conversa con nuestro asistente virtual especializado en barbería y estilo.</p>
+                </div>
+                <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-primary-200 hover:shadow-elegant transition-all duration-200">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="star" class="text-green-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary-800 mb-2">Recomendaciones</h3>
+                    <p class="text-primary-600">Catálogo actualizado con los cortes más modernos y tendencias actuales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Face Analysis Section -->
+    <section id="analisis" class="py-20 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Análisis de Tipo de Rostro</h2>
+                <p class="text-lg text-primary-600 max-w-2xl mx-auto">
+                    Selecciona tu tipo de rostro para recibir recomendaciones personalizadas de cortes que complementen tus facciones.
+                </p>
+            </div>
+
+            <!-- Face Type Selector -->
+            <div class="bg-white rounded-3xl p-8 shadow-elegant border border-primary-200 mb-12">
+                <h3 class="text-2xl font-semibold text-primary-800 mb-8 text-center">¿Cuál es tu tipo de rostro?</h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" id="faceTypeGrid">
+                    <!-- Face types will be populated by JavaScript -->
+                </div>
+
+                <!-- Selected Face Type Display -->
+                <div id="selectedFaceDisplay" class="mt-8 p-6 bg-gradient-to-r from-accent-50 to-warm-50 rounded-2xl border border-accent-200 hidden">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="text-accent-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-primary-800" id="selectedFaceName">Rostro Seleccionado</h4>
+                            <p class="text-primary-600" id="selectedFaceDesc">Descripción</p>
+                        </div>
+                        <button onclick="showRecommendations()" class="ml-auto bg-accent-500 hover:bg-accent-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                            Ver Recomendaciones
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hairstyle Catalog -->
+    <section id="catalogo" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Catálogo de Cortes</h2>
+                <p class="text-lg text-primary-600 max-w-2xl mx-auto">
+                    Nuestro chat bot ha seleccionado los mejores cortes modernos organizados por tipo de rostro.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center mb-12 bg-white rounded-2xl p-2 shadow-card">
+                <button onclick="filterHairstyles('todos')" class="filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-accent-500 text-white" data-filter="todos">Todos</button>
+                <button onclick="filterHairstyles('masculino')" class="filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-200 text-primary-600 hover:bg-primary-50" data-filter="masculino">Masculino</button>
+                <button onclick="filterHairstyles('femenino')" class="filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-200 text-primary-600 hover:bg-primary-50" data-filter="femenino">Femenino</button>
+                <button onclick="filterHairstyles('unisex')" class="filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-200 text-primary-600 hover:bg-primary-50" data-filter="unisex">Unisex</button>
+            </div>
+
+            <!-- Hairstyles Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="hairstylesGrid">
+                <!-- Hairstyles will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Generator Section -->
+    <section id="generador" class="py-20 bg-white/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Generador de Imágenes IA</h2>
+                <p class="text-lg text-primary-600 max-w-2xl mx-auto">
+                    Conversa con nuestro chat bot y genera imágenes realistas con DALL-E. Visualiza tu nuevo look.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-8 shadow-elegant border border-primary-200">
+                <div class="space-y-6">
+                    <!-- Custom Prompt Input -->
+                    <div>
+                        <label class="block text-sm font-semibold text-primary-800 mb-3">
+                            Describe el corte que quieres visualizar
+                        </label>
+                        <div class="relative">
+                            <textarea 
+                                id="customPrompt"
+                                rows="3"
+                                class="w-full px-4 py-3 border border-primary-300 rounded-xl focus:ring-2 focus:ring-accent-500 focus:border-transparent resize-none"
+                                placeholder="Ej: Corte bob asimétrico con flequillo lateral para rostro redondo, cabello castaño, estilo moderno..."
+                                maxlength="500"
+                                oninput="updateCharCount()"
+                            ></textarea>
+                            <div class="absolute bottom-3 right-3 text-xs text-primary-400" id="charCount">0/500</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Templates -->
+                    <div>
+                        <label class="block text-sm font-semibold text-primary-800 mb-3">
+                            O elige una plantilla rápida
+                        </label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <button onclick="useTemplate('fade masculino profesional elegante')" class="p-3 text-left bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-all duration-200">
+                                <div class="text-sm font-medium text-primary-800">Fade Profesional</div>
+                                <div class="text-xs text-primary-600">Corte masculino clásico</div>
+                            </button>
+                            <button onclick="useTemplate('bob femenino moderno con capas')" class="p-3 text-left bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-all duration-200">
+                                <div class="text-sm font-medium text-primary-800">Bob Moderno</div>
+                                <div class="text-xs text-primary-600">Corte femenino versátil</div>
+                            </button>
+                            <button onclick="useTemplate('pixie cut atrevido texturizado')" class="p-3 text-left bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-all duration-200">
+                                <div class="text-sm font-medium text-primary-800">Pixie Atrevido</div>
+                                <div class="text-xs text-primary-600">Corte corto dinámico</div>
+                            </button>
+                            <button onclick="useTemplate('shag desenfadado con capas')" class="p-3 text-left bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-all duration-200">
+                                <div class="text-sm font-medium text-primary-800">Shag Desenfadado</div>
+                                <div class="text-xs text-primary-600">Corte texturizado</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="flex justify-center">
+                        <button onclick="generateImage()" class="gradient-bg hover:opacity-90 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 transform hover:scale-105 shadow-elegant">
+                            <i data-lucide="sparkles" class="mr-2" size="20"></i>
+                            Generar con DALL-E
+                        </button>
+                    </div>
+
+                    <!-- Result Display -->
+                    <div id="generationResult" class="hidden bg-gradient-to-br from-accent-50 to-warm-50 rounded-2xl p-6 border border-accent-200">
+                        <h4 class="text-lg font-semibold text-primary-800 mb-4">Vista Previa del Resultado</h4>
+                        <div class="bg-white rounded-xl p-4 mb-4">
+                            <div class="w-full max-w-md mx-auto bg-gray-200 rounded-lg h-64 flex items-center justify-center">
+                                <p class="text-gray-500">La imagen aparecería aquí con una API key válida</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-primary-600">💡 Para generar imágenes reales, necesitas configurar tu API key de OpenAI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i data-lucide="scissors" class="text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Barbesencia Chat Bot IA</h3>
+                    </div>
+                    <p class="text-primary-300 mb-4">Tu asistente virtual especializado en cortes de pelo y estilo personal.</p>
+                    <div class="flex space-x-4">
+                        <button class="text-primary-300 hover:text-white transition-colors">
+                            <i data-lucide="instagram" size="20"></i>
+                        </button>
+                        <button class="text-primary-300 hover:text-white transition-colors">
+                            <i data-lucide="facebook" size="20"></i>
+                        </button>
+                        <button class="text-primary-300 hover:text-white transition-colors">
+                            <i data-lucide="twitter" size="20"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Herramientas</h4>
+                    <ul class="space-y-2 text-primary-300">
+                        <li><button onclick="scrollToSection('analisis')" class="hover:text-white transition-colors">Análisis de Rostro</button></li>
+                        <li><button onclick="scrollToSection('catalogo')" class="hover:text-white transition-colors">Catálogo de Cortes</button></li>
+                        <li><button onclick="scrollToSection('generador')" class="hover:text-white transition-colors">Generador IA</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Soporte</h4>
+                    <ul class="space-y-2 text-primary-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contacto</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Términos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Newsletter</h4>
+                    <p class="text-primary-300 mb-4">Recibe las últimas tendencias en cortes de pelo.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Tu email" class="flex-1 px-4 py-2 rounded-l-lg bg-primary-700 border border-primary-600 text-white placeholder-primary-400 focus:outline-none focus:border-accent-500">
+                        <button class="bg-accent-500 hover:bg-accent-600 px-4 py-2 rounded-r-lg transition-colors">
+                            <i data-lucide="mail" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-primary-700 mt-12 pt-8 text-center text-primary-400">
+                <p>&copy; 2024 Barbesencia Chat Bot IA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Face types data
+        const faceTypes = [
+            {
+                id: "ovalado",
+                name: "Ovalado",
+                description: "Proporcionado y equilibrado",
+                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200"
+            },
+            {
+                id: "redondo",
+                name: "Redondo", 
+                description: "Mejillas prominentes",
+                image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200"
+            },
+            {
+                id: "cuadrado",
+                name: "Cuadrado",
+                description: "Mandíbula definida",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200"
+            },
+            {
+                id: "alargado",
+                name: "Alargado",
+                description: "Frente alta y estrecha",
+                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200"
+            },
+            {
+                id: "corazon",
+                name: "Corazón",
+                description: "Frente ancha, barbilla estrecha",
+                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200"
+            },
+            {
+                id: "diamante",
+                name: "Diamante",
+                description: "Pómulos anchos",
+                image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200"
+            }
+        ];
+
+        // Hairstyles data
+        const hairstyles = [
+            {
+                id: "1",
+                name: "Fade Moderno",
+                description: "Corte degradado con transición suave, ideal para rostros ovalados y cuadrados.",
+                category: "masculino",
+                compatibleFaceTypes: ["ovalado", "cuadrado"],
+                imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+            },
+            {
+                id: "2",
+                name: "Undercut Clásico",
+                description: "Corte con contraste marcado entre la parte superior e inferior, perfecto para dar altura.",
+                category: "masculino",
+                compatibleFaceTypes: ["redondo", "alargado"],
+                imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+            },
+            {
+                id: "3",
+                name: "Pompadour Moderno",
+                description: "Volumen en la parte frontal con degradado lateral, ideal para equilibrar facciones.",
+                category: "masculino",
+                compatibleFaceTypes: ["corazon", "diamante"],
+                imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+            },
+            {
+                id: "4",
+                name: "Bob con Capas",
+                description: "Corte bob estructurado con capas que suaviza las líneas angulares del rostro.",
+                category: "femenino",
+                compatibleFaceTypes: ["redondo", "cuadrado"],
+                imageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+            },
+            {
+                id: "5",
+                name: "Pixie Moderno",
+                description: "Corte corto y dinámico que resalta los rasgos faciales más favorecedores.",
+                category: "femenino",
+                compatibleFaceTypes: ["ovalado", "alargado"],
+                imageUrl: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+            },
+            {
+                id: "6",
+                name: "Capas Largas Onduladas",
+                description: "Capas suaves que enmarcan el rostro y equilibran las proporciones faciales.",
+                category: "femenino",
+                compatibleFaceTypes: ["corazon", "diamante"],
+                imageUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+            },
+            {
+                id: "7",
+                name: "Shag Moderno",
+                description: "Corte texturizado con capas desconectadas que aporta movimiento y versatilidad.",
+                category: "unisex",
+                compatibleFaceTypes: ["ovalado", "redondo", "cuadrado"],
+                imageUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+            }
+        ];
+
+        let selectedFaceType = null;
+        let currentFilter = 'todos';
+
+        // Initialize the page
+        function initializePage() {
+            renderFaceTypes();
+            renderHairstyles();
+        }
+
+        // Render face types
+        function renderFaceTypes() {
+            const grid = document.getElementById('faceTypeGrid');
+            grid.innerHTML = faceTypes.map(faceType => `
+                <div onclick="selectFaceType('${faceType.id}')" 
+                     class="face-type-card bg-gradient-to-br from-accent-50 to-accent-100 rounded-2xl p-6 text-center border-2 border-transparent hover:border-accent-300" 
+                     id="face-${faceType.id}">
+                    <img src="${faceType.image}" alt="Rostro ${faceType.name.toLowerCase()}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="font-semibold text-primary-800 mb-2">${faceType.name}</h4>
+                    <p class="text-sm text-primary-600">${faceType.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Select face type
+        function selectFaceType(faceTypeId) {
+            selectedFaceType = faceTypeId;
+            const selectedFace = faceTypes.find(face => face.id === faceTypeId);
+            
+            // Update UI
+            document.querySelectorAll('.face-type-card').forEach(card => {
+                card.classList.remove('selected-face-type');
+            });
+            document.getElementById(`face-${faceTypeId}`).classList.add('selected-face-type');
+            
+            // Show selected face display
+            const display = document.getElementById('selectedFaceDisplay');
+            document.getElementById('selectedFaceName').textContent = `Rostro ${selectedFace.name}`;
+            document.getElementById('selectedFaceDesc').textContent = selectedFace.description;
+            display.classList.remove('hidden');
+        }
+
+        // Show recommendations
+        function showRecommendations() {
+            if (!selectedFaceType) return;
+            
+            const compatibleHairstyles = hairstyles.filter(hairstyle => 
+                hairstyle.compatibleFaceTypes.includes(selectedFaceType)
+            );
+            
+            alert(`Recomendaciones para rostro ${selectedFaceType}:\n\n${compatibleHairstyles.map(h => `• ${h.name}: ${h.description}`).join('\n')}`);
+        }
+
+        // Render hairstyles
+        function renderHairstyles() {
+            const grid = document.getElementById('hairstylesGrid');
+            const filteredHairstyles = currentFilter === 'todos' 
+                ? hairstyles 
+                : hairstyles.filter(h => h.category === currentFilter);
+            
+            grid.innerHTML = filteredHairstyles.map(hairstyle => `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-elegant transition-all duration-200 transform hover:scale-105">
+                    <img src="${hairstyle.imageUrl}" alt="${hairstyle.name}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-semibold text-primary-800">${hairstyle.name}</h3>
+                            <span class="px-2 py-1 rounded-full text-xs font-medium ${getCategoryBadgeColor(hairstyle.category)}">
+                                ${hairstyle.category.charAt(0).toUpperCase() + hairstyle.category.slice(1)}
+                            </span>
+                        </div>
+                        <p class="text-primary-600 text-sm mb-4">${hairstyle.description}</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex space-x-1">
+                                ${hairstyle.compatibleFaceTypes.map(faceType => 
+                                    `<span class="w-2 h-2 bg-accent-400 rounded-full" title="Rostro ${faceType}"></span>`
+                                ).join('')}
+                            </div>
+                            <button onclick="generateHairstyleImage('${hairstyle.name}')" class="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
+                                <i data-lucide="sparkles" size="16"></i>
+                                Generar IA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Re-initialize icons for new content
+            lucide.createIcons();
+        }
+
+        // Filter hairstyles
+        function filterHairstyles(filter) {
+            currentFilter = filter;
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === filter) {
+                    btn.className = 'filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-accent-500 text-white';
+                } else {
+                    btn.className = 'filter-btn px-6 py-3 rounded-xl font-medium transition-all duration-200 text-primary-600 hover:bg-primary-50';
+                }
+            });
+            
+            renderHairstyles();
+        }
+
+        // Get category badge color
+        function getCategoryBadgeColor(category) {
+            switch (category) {
+                case "masculino": return "bg-blue-100 text-blue-600";
+                case "femenino": return "bg-pink-100 text-pink-600";
+                case "unisex": return "bg-purple-100 text-purple-600";
+                default: return "bg-gray-100 text-gray-600";
+            }
+        }
+
+        // Use template
+        function useTemplate(template) {
+            document.getElementById('customPrompt').value = template;
+            updateCharCount();
+        }
+
+        // Update character count
+        function updateCharCount() {
+            const textarea = document.getElementById('customPrompt');
+            const counter = document.getElementById('charCount');
+            counter.textContent = `${textarea.value.length}/500`;
+        }
+
+        // Generate image
+        function generateImage() {
+            const prompt = document.getElementById('customPrompt').value.trim();
+            if (!prompt) {
+                alert('Por favor, describe el corte que quieres generar.');
+                return;
+            }
+            
+            // Show result section
+            const resultDiv = document.getElementById('generationResult');
+            resultDiv.classList.remove('hidden');
+            
+            alert('Función de generación de imágenes con IA requiere integración con OpenAI API.\n\nPrompt enviado: ' + prompt);
+        }
+
+        // Generate hairstyle image
+        function generateHairstyleImage(hairstyleName) {
+            alert(`Generando imagen de: ${hairstyleName}\n\nEsta función requiere integración con OpenAI API.`);
+        }
+
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>
